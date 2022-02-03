@@ -1,0 +1,29 @@
+{
+  "name": "stylelint-global-variables",
+  "version": "0.0.1",
+  "description": "A stylelint custom rule to import and use of less variables from config",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkroe/stylelint-global-variables.git"
+  },
+  "keywords": [
+    "stylelint",
+    "less",
+    "variables"
+  ],
+  "author": "nkroe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkroe/stylelint-global-variables/issues"
+  },
+  "homepage": "https://github.com/nkroe/stylelint-global-variables#readme",
+  "devDependencies": {
+    "postcss": "^8.4.6",
+    "postcss-less": "^6.0.0",
+    "stylelint": "^14.3.0"
+  },
+  "peerDependencies": {
+    "stylelint": "^14.3.0"
+  }
+}
