@@ -76,7 +76,7 @@ module.exports = stylelint.createPlugin(ruleName, function (options, _, context)
 
     const getVariable = value => (variablesByValueDict[value] ? `@${variablesByValueDict[value]}` : undefined);
 
-    const variableHandler = (decl, variable, value) => {
+    const variableHandler = (decl, variable, newValue, oldValue) => {
       if (context.fix && options.fixible) {
         if (!isVariablesImported) {
           addImportVariables(root, options.variablesPath);
@@ -84,16 +84,16 @@ module.exports = stylelint.createPlugin(ruleName, function (options, _, context)
           isVariablesImported = true;
         }
 
-        utils.setDeclarationValue(decl, value);
+        utils.setDeclarationValue(decl, newValue);
 
         return;
       }
 
       stylelint.utils.report({
-        message: messages.expected(value, variable),
+        message: messages.expected(oldValue, variable),
         node: decl,
         index: utils.declarationValueIndex(decl),
-        word: value,
+        word: oldValue,
         result,
         ruleName,
       });
@@ -107,7 +107,7 @@ module.exports = stylelint.createPlugin(ruleName, function (options, _, context)
       const variable = getVariable(fullValue);
 
       if (variable) {
-        variableHandler(decl, variable, variable);
+        variableHandler(decl, variable, variable, fullValue);
 
         return;
       }
@@ -119,7 +119,7 @@ module.exports = stylelint.createPlugin(ruleName, function (options, _, context)
 
         if (!variable) return;
 
-        variableHandler(decl, variable, fullValue.replace(partOfValue, variable));
+        variableHandler(decl, variable, fullValue.replace(partOfValue, variable), partOfValue);
       });
     });
   };

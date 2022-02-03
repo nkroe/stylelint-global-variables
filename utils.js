@@ -1,4 +1,4 @@
-export function setDeclarationValue(decl, value) {
+function setDeclarationValue(decl, value) {
   const raws = decl.raws;
 
   if (raws.value) {
@@ -10,7 +10,7 @@ export function setDeclarationValue(decl, value) {
   return decl;
 }
 
-export function declarationValueIndex(decl) {
+function declarationValueIndex(decl) {
   const raws = decl.raws;
 
   return [
@@ -28,12 +28,19 @@ export function declarationValueIndex(decl) {
   }, 0);
 }
 
-export function isString(value) {
+function isString(value) {
   return typeof value === 'string' || value instanceof String;
 }
 
-export function getDeclarationValue(decl) {
+function getDeclarationValue(decl) {
   const raws = decl.raws;
 
   return (raws.value && raws.value.raw) || decl.value;
 }
+
+module.exports = {
+  setDeclarationValue,
+  declarationValueIndex,
+  isString,
+  getDeclarationValue,
+};
