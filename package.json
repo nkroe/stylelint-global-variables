@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-global-variables",
+  "name": "@itgenio/stylelint-global-variables",
   "version": "0.0.1",
   "description": "A stylelint custom rule to import and use of less variables from config",
   "main": "index.js",
@@ -24,6 +24,11 @@
     "stylelint": "^14.3.0"
   },
   "peerDependencies": {
+    "postcss": "^8.4.6",
+    "postcss-less": "^6.0.0",
     "stylelint": "^14.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
