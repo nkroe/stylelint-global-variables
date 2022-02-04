@@ -17,7 +17,7 @@ function declarationValueIndex(decl) {
     raws.prop && raws.prop.prefix,
     (raws.prop && raws.prop.raw) || decl.prop,
     raws.prop && raws.prop.suffix,
-    raws.between || ':',
+    raws.between || ":",
     raws.value && raws.value.prefix,
   ].reduce((count, str) => {
     if (str) {
@@ -29,7 +29,7 @@ function declarationValueIndex(decl) {
 }
 
 function isString(value) {
-  return typeof value === 'string' || value instanceof String;
+  return typeof value === "string" || value instanceof String;
 }
 
 function getDeclarationValue(decl) {
@@ -38,9 +38,27 @@ function getDeclarationValue(decl) {
   return (raws.value && raws.value.raw) || decl.value;
 }
 
+const validatePath = (allowedPaths, sourcePath) => {
+  if (allowedPaths.length === 0) return true;
+
+  const regExps = allowedPaths.map((allowedPath) => {
+    const regExpPath = allowedPath
+      .replace("./", "(.+)?")
+      .replace("**", ".+")
+      .replace("*.", "\\w+.");
+
+    return new RegExp(regExpPath);
+  });
+
+  const sourcePathWithReplacedSlashes = sourcePath.replace(/\\/g, "/");
+
+  return regExps.some((regExp) => regExp.test(sourcePathWithReplacedSlashes));
+};
+
 module.exports = {
   setDeclarationValue,
   declarationValueIndex,
   isString,
   getDeclarationValue,
+  validatePath,
 };
