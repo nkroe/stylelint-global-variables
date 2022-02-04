@@ -89,10 +89,11 @@ module.exports = stylelint.createPlugin(
 
       let isVariablesImported = false;
 
-      const getVariable = (value) =>
-        variablesByValueDict[value]
+      const getVariable = (value) => {
+        return variablesByValueDict[value]
           ? `@${variablesByValueDict[value]}`
           : undefined;
+      };
 
       const variableHandler = (decl, variable, newValue, oldValue) => {
         if (context.fix && options.fixible) {
