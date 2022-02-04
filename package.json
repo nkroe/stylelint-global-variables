@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/stylelint-global-variables",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A stylelint custom rule to import and use of less variables from config",
   "main": "index.js",
   "repository": {
